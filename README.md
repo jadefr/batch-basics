@@ -39,8 +39,8 @@ Projeto baseado em https://bitbucket.org/ramram43210/java_spring_2019/src/master
   
     ## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
     spring.datasource.url=jdbc:mysql://localhost:3306/regions?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    spring.datasource.username=root
-    spring.datasource.password=root
+    spring.datasource.username=
+    spring.datasource.password=
     spring.batch.initialize-schema=ALWAYS
     spring.batch.job.enabled=false
 
