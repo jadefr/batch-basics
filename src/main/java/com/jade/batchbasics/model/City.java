@@ -6,7 +6,7 @@ public class City {
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long id;
 
-    private int id;
+    private String ibge_id;
 
     private String name;
 
@@ -30,8 +30,9 @@ public class City {
         super();
     }
 
-    public City(String name, String uf, String capital, String lon, String lat, String no_accents, String alternative_names, String microregion, String mesoregion) {
+    public City(String ibge_id, String name, String uf, String capital, String lon, String lat, String no_accents, String alternative_names, String microregion, String mesoregion) {
         super();
+        this.ibge_id = ibge_id;
         this.name = name;
         this.uf = uf;
         this.capital = capital;
@@ -43,12 +44,12 @@ public class City {
         this.mesoregion = mesoregion;
     }
 
-    public int getId() {
-        return id;
+    public String getIbge_id() {
+        return ibge_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIbge_id(String ibge_id) {
+        this.ibge_id = ibge_id;
     }
 
     public String getName() {
@@ -126,7 +127,7 @@ public class City {
     @Override
     public String toString() {
         return "City{" +
-                "id=" + id +
+                "ibge_id=" + ibge_id +
                 ", name='" + name + '\'' +
                 ", uf='" + uf + '\'' +
                 ", capital='" + capital + '\'' +

@@ -52,7 +52,7 @@ public class BatchConfiguration {
         reader.setResource(new ClassPathResource("BackEnd.csv"));
         reader.setLineMapper(new DefaultLineMapper<City>() {{
                                  setLineTokenizer(new DelimitedLineTokenizer() {{
-                                                      setNames("ibge_id", "uf", "name", "capital", "lon", "lat", "no_accents", "alternative_names", "microregion", "mesoregion");
+                                                      setNames("ibge_id","uf", "name", "capital", "lon", "lat", "no_accents", "alternative_names", "microregion", "mesoregion");
                                                   }}
                                  );
                                  setFieldSetMapper(new BeanWrapperFieldSetMapper<City>() {{
@@ -85,7 +85,7 @@ public class BatchConfiguration {
         writer.setItemSqlParameterSourceProvider(
                 new BeanPropertyItemSqlParameterSourceProvider<City>()
         );
-        writer.setSql("INSERT INTO city (ibge_id,uf,name,capital,lon,lat,no_accents,alternative_names,microregion,mesoregion) VALUES (:ibge_id,:uf,:name,:capital,:lon,:lat,:no_accents,:alternative_names,:microregion,:mesoregion)");
+        writer.setSql("INSERT INTO city (ibge_id, uf,name,capital,lon,lat,no_accents,alternative_names,microregion,mesoregion) VALUES (:ibge_id, :uf,:name,:capital,:lon,:lat,:no_accents,:alternative_names,:microregion,:mesoregion)");
         writer.setDataSource(dataSource);
         return writer;
     }
@@ -98,87 +98,12 @@ public class BatchConfiguration {
     }
 
 
+    /**
+     * chunk size was determined as the amount of rows
+     */
     @Bean Step step1() {
-        return stepBuilderFactory.get("step1").<City, City>chunk(10).reader(reader())
+        return stepBuilderFactory.get("step1").<City, City>chunk(5566).reader(reader())
                .processor(processor()).writer(writer()).build();
     }
-
-//    @Bean
-//    public LineMapper<City> lineMapper() {
-//        final DefaultLineMapper<City> defaultLineMapper = new DefaultLineMapper<>();
-//        final DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
-//        lineTokenizer.setDelimiter(",");
-//        lineTokenizer.setStrict(false);
-//        lineTokenizer.setNames("ibge_id","uf","name","capital","lon","lat","no_accents","alternative_names","microregion","mesoregion");
-//
-//        final CityFieldSetMapper fieldSetMapper = new CityFieldSetMapper();
-//        defaultLineMapper.setLineTokenizer(lineTokenizer);
-//        defaultLineMapper.setFieldSetMapper(fieldSetMapper);
-//
-//        return defaultLineMapper;
-//    }
-//
-//    @Bean
-//    public FlatFileItemReader<City> reader() {
-//        return new FlatFileItemReaderBuilder<City>()
-//                .name("cityReader")
-//                .resource(new ClassPathResource("BackEnd.csv"))
-//                .delimited()
-//                .names("ibge_id","uf","name","capital","lon","lat","no_accents","alternative_names","microregion","mesoregion")
-//                .lineMapper(lineMapper())
-//                .fieldSetMapper(new
-//                        BeanWrapperFieldSetMapper<City>() {{
-//                            setTargetType(City.class);
-//                        }})
-//                .build();
-//    }
-//
-//    @Bean
-//    public JdbcBatchItemWriter<City> writer(final DataSource dataSource) {
-//        return new JdbcBatchItemWriterBuilder<City>()
-//                .itemSqlParameterSourceProvider(new
-//                        BeanPropertyItemSqlParameterSourceProvider<>())
-//                .sql("INSERT INTO cidades.city_table (ibge_id,uf,name,capital,lon,lat,no_accents,alternative_names,microregion,mesoregion) VALUES (:ibge_id,:uf,:name,:capital,:lon,:lat,:no_accents,:alternative_names,:microregion,:mesoregion)")
-//                .dataSource(dataSource)
-//                .build();
-//    }
-//
-//    @Bean
-//    public Step step1(JdbcBatchItemWriter<City> writer) {
-//        return stepBuilderFactory.get("step1")
-//                .<City, City> chunk(100)
-//                .reader(reader())
-//                .writer(writer)
-//                .build();
-//    }
-
-
-//
-//    @Bean
-//    public FlatFileItemReader<City> reader() {
-//        return new FlatFileItemReader<City>()
-//                .name("cityReader")
-//                .resource(new ClassPathResource("BackEnd.csv"))
-//                .delimited()
-//                .names(new String[]{"ibge_id","uf","name","capital","lon","lat","no_accents","alternative_names","microregion","mesoregion"})
-//                .lineMapper()
-//                .fieldSetMapper(new
-//                                        BeanWrapperFieldSetMapper<City>() {{
-//                                            setTargetType(City.class);
-//                                        }})
-//                .build();
-//    }
-//
-//
-
-//
-//    @Bean
-//    public FlatFileItemWriter itemWriter() {
-//        return  new FlatFileItemWriterBuilder<City>()
-//                .name("itemWriter")
-//                .resource(new FileSystemResource("target/test-outputs/output.txt"))
-//                .lineAggregator(new PassThroughLineAggregator<>())
-//                .build();
-//    }
 
 }

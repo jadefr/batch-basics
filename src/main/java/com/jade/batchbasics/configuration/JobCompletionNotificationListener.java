@@ -32,7 +32,8 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
                     new RowMapper<City>() {
                         @Override
                         public City mapRow(ResultSet rs, int row) throws SQLException {
-                            return new City(rs.getString(0),
+                            return new City(
+                                    rs.getString(0),
                                     rs.getString(1),
                                     rs.getString(2),
                                     rs.getString(3),
@@ -46,6 +47,10 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
                         }
                     }
             );
+
+            for (City city : results) {
+                System.out.println(city);
+            }
         }
     }
 }
