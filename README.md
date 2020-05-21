@@ -1,6 +1,6 @@
 # batch-basics
 
-O Spring Batch foi utilizado para ler um arquivo csv e armazenar os registros em uma tabela SQL.
+O __Spring Batch__ foi utilizado para ler um arquivo csv e armazenar os registros em uma tabela SQL.
 
 O arquivo utilizado contém informações sobre todos os municípios do Brasil. Os dados foram mapeados em dez colunas.
 
