@@ -2,10 +2,6 @@ package com.jade.batchbasics.model;
 
 public class City {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
-
     private String ibge_id;
 
     private String name;

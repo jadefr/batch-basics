@@ -6,7 +6,6 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
@@ -19,7 +18,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
 import javax.sql.DataSource;
-import java.util.function.Function;
 
 /**
  * The annotation EnableBatchProcessing enables Spring Batch features and provides a base configuration
@@ -49,7 +47,7 @@ public class BatchConfiguration {
     public FlatFileItemReader<City> reader() {
         System.out.println("-----------Inside reader() method--------");
         FlatFileItemReader<City> reader = new FlatFileItemReader<>();
-        reader.setResource(new ClassPathResource("BackEnd.csv"));
+        reader.setResource(new ClassPathResource("arquivo.csv"));
         reader.setLineMapper(new DefaultLineMapper<City>() {{
                                  setLineTokenizer(new DelimitedLineTokenizer() {{
                                                       setNames("ibge_id","uf", "name", "capital", "lon", "lat", "no_accents", "alternative_names", "microregion", "mesoregion");
