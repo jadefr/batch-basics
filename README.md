@@ -58,7 +58,7 @@ Um objeto writer, da classe JdbcBatchItemWriter<> do Spring Batch, é instanciad
 
 ### Job importCityJob(JobCompletionNotificationListener listener)
 
-
+Define o job
 
 
 
@@ -106,6 +106,11 @@ Código para gerar a tabela, em SQL:
   Para que o Job seja inicializado, é necessário chamar o controller:
   
     http://localhost:8080/run-batch-job
+    
+  
+ Alternativamente, para que o Job seja inicializado automaticamente (sem a necessidade de se chamar o controller), deve-se omitir a seguinte linha do _application.properties_:
+ 
+    spring.batch.job.enabled=false
   
 # Rerun
 
