@@ -4,6 +4,8 @@ O __Spring Batch__ foi utilizado para ler um arquivo csv e armazenar os registro
 
 O arquivo utilizado contém informações sobre todos os municípios do Brasil. Os dados foram mapeados em dez colunas.
 
+A documentação do Spring Batch pode ser encontrada em https://docs.spring.io/spring-batch/docs/current/reference/html/index.html
+
 Projeto baseado em https://bitbucket.org/ramram43210/java_spring_2019/src/master/JavaEE_2020/SpringBoot_BatchService/
 
 # Tech Stack
@@ -34,33 +36,29 @@ Projeto baseado em https://bitbucket.org/ramram43210/java_spring_2019/src/master
         └ arquivo.csv
         
 
-# Classes
-
-Breve descrição sobre as classes do pacote configuration.
-
-A documentação do Spring Batch pode ser encontrada em https://docs.spring.io/spring-batch/docs/current/reference/html/index.html
-
-## BatchConfiguration.java 
+# Classe BatchConfiguration.java 
 
 A seguir são explicados os métodos da classe.
 
-###  FlatFileItemReader<City> reader()
+##  FlatFileItemReader<City> reader()
 
 Um objeto reader, pertencente à classe FlatFileItemReader<>, lê o arquivo.csv e transforma os campos a serem mapeados em colunas, através do método _DelimitedLineTokenizer()_, definido no método _setLineMapper()_ do reader, ambos nativos do Spring Batch.
 
-### CityProcessor processor()
+## CityProcessor processor()
 
 Executa o processamento, definido na classe CityProcessor.java, antes de inserir os registros no banco de dados.
 
-### JdbcBatchItemWriter<City> writer()
+## JdbcBatchItemWriter<City> writer()
     
 Um objeto writer, da classe JdbcBatchItemWriter<> do Spring Batch, é instanciado para inserir os registros no banco. A inserção é feita através dos métodos _setSql()_ e _setDataSource_.
 
-### Job importCityJob(JobCompletionNotificationListener listener)
+## Step step1()
 
-Define o job
+Intancia o step, que é a unidade fundamental do job, utilizada para configurar as informações necessárias para definir e controlar o processamento em batch. O step envolve o reader, processor e writer.
 
+## Job importCityJob(JobCompletionNotificationListener listener)
 
+Instancia o job, construído através do step.
 
         
 # Conexão com o Banco de Dados
@@ -103,12 +101,12 @@ Código para gerar a tabela, em SQL:
 
   # JobInvoker
   
-  Para que o Job seja inicializado, é necessário chamar o controller:
+  Para que o job seja inicializado, é necessário chamar o controller:
   
     http://localhost:8080/run-batch-job
     
   
- Alternativamente, para que o Job seja inicializado automaticamente (sem a necessidade de se chamar o controller), deve-se omitir a seguinte linha do _application.properties_:
+ Alternativamente, para que o job seja inicializado automaticamente (sem a necessidade de se chamar o controller), deve-se omitir a seguinte linha do _application.properties_:
  
     spring.batch.job.enabled=false
   
