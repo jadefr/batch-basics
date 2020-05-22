@@ -33,6 +33,36 @@ Projeto baseado em https://bitbucket.org/ramram43210/java_spring_2019/src/master
         └ application.properties
         └ arquivo.csv
         
+
+# Classes
+
+Breve descrição sobre as classes do pacote configuration.
+
+A documentação do Spring Batch pode ser encontrada em https://docs.spring.io/spring-batch/docs/current/reference/html/index.html
+
+## BatchConfiguration.java 
+
+A seguir são explicados os métodos da classe.
+
+###  FlatFileItemReader<City> reader()
+
+Um objeto reader, pertencente à classe FlatFileItemReader<>, lê o arquivo.csv e transforma os campos a serem mapeados em colunas, através do método _DelimitedLineTokenizer()_, definido no método _setLineMapper()_ do reader, ambos nativos do Spring Batch.
+
+### CityProcessor processor()
+
+Executa o processamento, definido na classe CityProcessor.java, antes de inserir os registros no banco de dados.
+
+### JdbcBatchItemWriter<City> writer()
+    
+Um objeto writer, da classe JdbcBatchItemWriter<> do Spring Batch, é instanciado para inserir os registros no banco. A inserção é feita através dos métodos _setSql()_ e _setDataSource_.
+
+### Job importCityJob(JobCompletionNotificationListener listener)
+
+
+
+
+
+        
 # Conexão com o Banco de Dados
   
   Arquivo _application.properties_:
